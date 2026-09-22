@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Daniela's Quinceañera - Find Your Seat</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #fff8fb;
+    margin: 0;
+    padding: 30px 20px;
+    text-align: center;
+    color: #333;
+  }
+
+  .container {
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    padding: 35px 25px;
+    border-radius: 20px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+  }
+
+  h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-size: 19px;
+    font-weight: normal;
+    margin-bottom: 30px;
+  }
+
+  input {
+    width: 90%;
+    padding: 15px;
+    font-size: 18px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+
+  button {
+    padding: 14px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    background: #d69ab5;
+    color: white;
+    cursor: pointer;
+  }
+
+  #result {
+    margin-top: 25px;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.5;
+  }
+
+  .small {
+    font-size: 14px;
+    color: #777;
+    margin-top: 25px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Welcome to Daniela's Quinceañera</h1>
+  <h2>Please enter your name to find your table.</h2>
+
+  <input
+    type="text"
+    id="guestName"
+    placeholder="Enter your name"
+    autocomplete="off"
+  >
+
+  <br>
+
+  <button onclick="findSeat()">Find My Seat</button>
+
+  <div id="result"></div>
+
+  <div class="small">
+    We are so happy to celebrate with you!
+  </div>
+
+</div>
+
+<script>
+
+const guests = {
+
+  // TABLE 1
+  "sandra": 1,
+  "elmer": 1,
+  "veronica": 1,
+  "daniela": 1,
+  "uriel": 1,
+  "antonio": 1,
+  "josue": 1,
+  "esther": 1,
+  "victor": 1,
+
+  // TABLE 2
+  "cesar": 2,
+  "jaquelin": 2,
+  "julia": 2,
+  "kevin": 2,
+  "ariana": 2,
+  "dalila": 2,
+  "ahmed": 2,
+  "ovidito": 2,
+  "miriam hernandez": 2,
+  "paulina": 2,
+
+  // TABLE 3
+  "gabriela": 3,
+  "enedino": 3,
+  "danai": 3,
+  "blanca": 3,
+  "edgar": 3,
+  "edgar jr": 3,
+  "pedro": 3,
+  "yisel": 3,
+  "sofia": 3,
+  "adolfo": 3,
+
+  // TABLE 4
+  "jose guadalupe": 4,
+  "jose guadalupe and family": 4,
+  "jose maria": 4,
+  "alexis": 4,
+  "leslie": 4,
+  "jordy": 4,
+  "melany": 4,
+  "luis": 4,
+  "ashley aviles": 4,
+
+  // TABLE 5
+  "david": 5,
+  "lindsey": 5,
+  "bebe": 5,
+  "elmer escobar": 5,
+  "alma": 5,
+  "sebastian": 5,
+  "juana": 5,
+  "bernardo": 5,
+  "evelin": 5,
+
+  // TABLE 6
+  "erika": 6,
+  "dory": 6,
+  "tabby": 6,
+  "yordenis": 6,
+  "sandro": 6,
+  "claudia": 6,
+  "mayson": 6,
+  "ursula": 6,
+  "karina": 6,
+  "mia": 6,
+  "samantha": 6,
+
+  // TABLE 7
+  "jireh": 7,
+  "melanie": 7,
+  "ashley": 7,
+  "nicolas": 7,
+  "miriam": 7,
+  "ivana": 7,
+  "valentina": 7,
+  "jose": 7,
+  "alicia": 7,
+  "axel": 7
+};
+
+function cleanName(name) {
+  return name
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .replace(/\s+/g, " ");
+}
+
+function findSeat() {
+
+  const enteredName = cleanName(
+    document.getElementById("guestName").value
+  );
+
+  const result = document.getElementById("result");
+
+  if (!enteredName) {
+    result.innerHTML = "Please enter your name.";
+    return;
+  }
+
+  if (guests[enteredName]) {
+
+    result.innerHTML =
+      "Welcome! 💕<br>Your table is<br>" +
+      "<span style='font-size:36px;'>Table " +
+      guests[enteredName] +
+      "</span>";
+
+  } else {
+
+    result.innerHTML =
+      "We couldn't find that name.<br>" +
+      "<span style='font-size:16px;font-weight:normal;'>" +
+      "Please check the spelling or ask for assistance." +
+      "</span>";
+  }
+}
+
+document.getElementById("guestName")
+  .addEventListener("keypress", function(event) {
+
+    if (event.key === "Enter") {
+      findSeat();
+    }
+
+  });
+
+</script>
+
+</body>
+</html>
